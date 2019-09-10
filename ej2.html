@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Ej1</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            
+            //Declaración de variables
+            var x = "", aux = 0;
+            
+            //Fetch de datos
+            fetch("https://reqres.in/api/users")
+            .then(function(respuesta){
+            return respuesta.json();
+            })
+            .then(function(Nombres){
+                x = Nombres["data"];
+            })
+            
+            //body
+            function p()
+            {
+                aux = parseInt(document.getElementById("userId").value);
+                window.location.replace(x[aux]["avatar"]); 
+            }
+        </script>
+    </body>
+    <form>
+        <input required type="text" id="userId">
+        <input type="button" onclick="p()" value="GET">
+    </form>
+</html>
