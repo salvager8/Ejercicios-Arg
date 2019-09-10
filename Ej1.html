@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Ej1</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            
+            //Declaración de variables
+            var aux = 0, i = 0, x = "";
+            
+            //Fetch de datos
+            fetch("https://reqres.in/api/users?page=1")
+            .then(function(respuesta){
+            return respuesta.json();
+            })
+            .then(function(Nombres){
+                x = Nombres["data"];
+                console.log(x);
+                cal();
+            })
+            
+            function cal(){
+                //Script body
+                for(i==0; i<x.length; i++)
+                {
+                    if((x[i]["first_name"].length+x[i]["last_name"].length)>12)
+                    {
+                        aux = aux + 1;
+                    }
+                }
+
+                //Resultados aplicando regla de tres
+                var res = (aux * 100) / x.length;
+                console.log(res);
+            }
+            
+        </script>
+    </body>
+</html>
