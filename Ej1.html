@@ -4,36 +4,25 @@
     </head>
     <body>
         <script type="text/javascript">
-            
-            //Declaración de variables
-            var aux = 0, i = 0, x = "";
-            
-            //Fetch de datos
-            fetch("https://reqres.in/api/users?page=1")
-            .then(function(respuesta){
-            return respuesta.json();
-            })
-            .then(function(Nombres){
-                x = Nombres["data"];
-                console.log(x);
-                cal();
-            })
-            
-            function cal(){
-                //Script body
-                for(i==0; i<x.length; i++)
-                {
-                    if((x[i]["first_name"].length+x[i]["last_name"].length)>12)
-                    {
-                        aux = aux + 1;
-                    }
-                }
+            const URL = "https://reqres.in/api/users?page=1";
 
-                //Resultados aplicando regla de tres
-                var res = (aux * 100) / x.length;
-                console.log(res);
+            fetch(URL)
+                .then(response => response.json())
+                .then(json => console.log(
+                    `The percentage of persons that have more than twelve characters in their full names is ${amountOfNamesGreaterThanTwelve(json.data)}%`
+                ))
+                .catch(err => console.error(err));
+
+            function amountOfNamesGreaterThanTwelve(names) {
+                let amount = 0;
+                for (let name of names)
+                {
+                    if (name.first_name.length + name.last_name.length > 12) 
+                        amount++;
+                }
+                const result = (amount * 100) / names.length;
+                return result.toFixed(2);
             }
-            
         </script>
     </body>
 </html>
